@@ -1,0 +1,16 @@
+general:
+  output_file: test.py
+  exception_path: exception.png
+  reports_path: report.html
+
+browsers:
+  - chrome
+  - firefox
+  
+reports:
+  - console
+
+resolution_x: 1920
+resolution_y: 1080
+timeout: 60
+timeout_small: 10

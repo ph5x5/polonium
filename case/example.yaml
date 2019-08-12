@@ -1,0 +1,76 @@
+config: ./case/config.yaml
+browsers: {{browsers}}
+reports: {{reports}}
+
+
+steps:
+    - wipe_cookies:
+
+    - setResolution:
+        x: {{resolution_x}}
+        y: {{resolution_y}}
+
+    - get:
+        uri: "http://www.onliner.by"
+
+    - check:
+        type: css_selector
+        element: "#fast-search > form > input.fast-search__input"
+        timeout: {{timeout}}
+
+    - clear:
+        type: css_selector
+        element: "#fast-search > form > input.fast-search__input"
+
+    - input:
+        type: css_selector
+        element: "#fast-search > form > input.fast-search__input"
+        value: GTX
+
+    - check:
+        type: id
+        element: "fast-search-modal"
+        timeout: {{timeout}}
+
+    - frame:
+        type: xpath
+        element: "//*[@id='fast-search-modal']/div/div/iframe"
+
+    - check:
+        type: xpath
+        element: "//*[@id='search-page']/div[2]/ul/li[2]/div"
+        timeout: {{timeout}}
+
+    - click:
+        type: xpath
+        element: "//*[@id='search-page']/div[2]/ul/li[2]/div"
+
+    - check:
+        type: css_selector
+        element: "#schema-products > div:nth-child(1) > div > div.schema-product__part.schema-product__part_2 > div.schema-product__part.schema-product__part_4 > div.schema-product__title > a > span"
+        timeout: {{timeout}}
+
+    - click:
+        type: css_selector
+        element: "#schema-products > div:nth-child(1) > div > div.schema-product__part.schema-product__part_2 > div.schema-product__part.schema-product__part_4 > div.schema-product__title > a > span"
+
+    - check:
+        type: css_selector
+        element: "#mCSB_1_container > div > div.product-gallery__thumb.js-gallery-thumb"
+        timeout: {{timeout}}
+
+    - click:
+        type: css_selector
+        element: "#mCSB_1_container > div > div.product-gallery__thumb.js-gallery-thumb"
+
+    - check:
+        type: css_selector
+        element: "#product-gallery-fotorama > div > div > div.fotorama__stage__shaft > div.fotorama__stage__frame.fotorama__loaded.fotorama__loaded--img.fotorama__active"
+        timeout: {{timeout}}
+
+    - scroll:
+        type: css_selector
+        element: "#product-gallery-fotorama > div > div > div.fotorama__stage__shaft > div.fotorama__stage__frame.fotorama__loaded.fotorama__loaded--img.fotorama__active"
+
+    - screenshot:
+        file: gtx.png

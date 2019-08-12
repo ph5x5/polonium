@@ -1,0 +1,54 @@
+# Simple console logger
+infrastructure:
+  string_start: 'print("'
+  string_end: '")'
+
+
+headers:
+  - string: '-------------------------------------'
+  - string: 'Running steps for {browser} browser..'
+  - string: '-------------------------------------'
+
+
+steps:
+  wipe_cookies:
+    string: 'Wiping all cookies..'
+
+  setResolution:
+    string: 'Setting resolution to: {x}x{y}..'
+
+  get:
+    string: 'Getting URI content: {uri}..'
+
+  check:
+    string: 'Checking if element {type}:{element} is present..'
+
+  click:
+    string: 'Clicking on element {type}:{element}..'
+
+  clear:
+    string: 'Clearing element {type}:{element}..'
+
+  input:
+    string: 'Putting {value} into element {type}:{element}..'
+
+  frame:
+    string: 'Switching to frame {type}:{element}..'
+
+  assert:
+    string: 'Asserting the element {type}:{element} has value: {value}..'
+
+  screenshot:
+    string: 'Saving screenshot to file: {file}..'
+
+  scroll:
+    string: 'Scrolling to element: {type}:{element}..' 
+  
+  get_text:
+    string: 'Receiving text of element: {type}:{element}..'
+    string_after: 'Text of the element has value: " + parsed_text + "'
+
+
+footers:
+  - string: 'Steps completed successfully'
+  - string: '-------------------------------------'

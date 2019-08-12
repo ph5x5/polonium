@@ -1,0 +1,81 @@
+headers:
+  imports:
+    - string: "#! python3"
+      indent: 0
+    - string: from selenium import webdriver
+      indent: 0
+    - string: from selenium.common.exceptions import TimeoutException
+      indent: 0 
+    - string: import time
+      indent: 0
+
+  init:
+    - name: set_remote
+      string: 'browser{browserId} = webdriver.Remote( command_executor = "{hub}", desired_capabilities = {{ "browserName": "{browserName}", "javascriptEnabled": True }} )'
+      indent: 0
+
+
+steps:
+  wipe_cookies:
+    - string: 'browser{browserId}.delete_all_cookies()'
+      indent: 0
+  
+  setResolution:
+    - string: browser{browserId}.set_window_size({x}, {y})
+      indent: 0
+
+  get:
+    - string: browser{browserId}.get("{uri}")
+      indent: 0
+
+  check:
+    - string: 'for i in range({timeout}):'
+      indent: 0
+    - string: 'try:'
+      indent: 1
+    - string: 'if browser{browserId}.find_element_by_{type}("{element}").is_displayed(): break'
+      indent: 2
+    - string: 'except: pass'
+      indent: 1
+    - string: time.sleep(1)
+      indent: 1
+    - string: 'else:'
+      indent: 0
+    - string: 'print("FAILURE: Timeout {timeout}s reached")'
+      indent: 1
+    - string: 'exit(1)'
+      indent: 1
+
+  click:
+    - string: 'browser{browserId}.find_element_by_{type}("{element}").click()'
+      indent: 0
+
+  clear:
+    - string: 'browser{browserId}.find_element_by_{type}("{element}").clear()'
+      indent: 0
+
+  input:
+    - string: 'browser{browserId}.find_element_by_{type}("{element}").send_keys("{value}")'
+      indent: 0
+
+  frame:
+    - string: 'browser{browserId}.switch_to_frame(browser{browserId}.find_element_by_{type}("{element}"))'
+      indent: 0
+
+  assert:
+    - string: 'if browser{browserId}.find_element_by_{type}("{element}").text != "{value}":'
+      indent: 0
+    - string: exit(1)
+      indent: 1
+
+  screenshot:
+    - string: 'browser{browserId}.save_screenshot("{file}")'
+      indent: 0
+
+  scroll:
+    - string: 'browser{browserId}.execute_script("arguments[0].scrollIntoView();", browser{browserId}.find_element_by_{type}("{element}"))'
+      indent: 0
+
+  get_text:
+    - string: 'parsed_text = browser{browserId}.find_element_by_{type}("{element}").text'
+      indent: 0
