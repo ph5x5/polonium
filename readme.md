@@ -16,7 +16,7 @@ For now it converts the YAML steps to the python code and launches the result te
 > ./cases/example.yaml
 
 **It could be launched with command. YES! It's as simple as this:**
-> python -u './polonium.py' --case './cass/example.yaml'
+> python -u './polonium.py' --case './case/example.yaml'
 
 ## Command line parameters:
 - --case      - the case file with browser actions (mandatory)
